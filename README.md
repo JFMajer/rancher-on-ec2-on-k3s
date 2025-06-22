@@ -21,7 +21,7 @@ This project provisions a **lab/demo environment** for Rancher on AWS using EC2,
 ## Prerequisites
 - Terraform >= 1.0
 - AWS CLI configured with appropriate permissions
-- A registered domain in Route53 (e.g., `rancher.heheszlo.com`)
+- A registered domain in Route53
 
 ## Usage
 
@@ -52,7 +52,7 @@ This project provisions a **lab/demo environment** for Rancher on AWS using EC2,
    ```
 
 6. **Access Rancher:**
-   - After deployment, Rancher will be available at `https://<your-domain>` (e.g., `https://rancher.heheszlo.com`).
+   - After deployment, Rancher will be available at `https://<your-domain>`
    - The admin password is stored in AWS Secrets Manager.
 
 ## Module Structure
@@ -75,6 +75,3 @@ To destroy all resources:
 ```sh
 terraform destroy
 ```
-
-## License
-MIT
