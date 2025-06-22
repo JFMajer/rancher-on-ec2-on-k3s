@@ -16,7 +16,7 @@ This project provisions a **lab/demo environment** for Rancher on AWS using EC2,
 ## ⚠️ Lab/Non-HA Disclaimer
 - This setup is **not for production**. It runs Rancher in single-node (non-HA) mode for learning, testing, or demos.
 - All stateful data is on a single EC2 instance. If the instance is lost, so is your Rancher data.
-- For production, use Rancher HA with an external database and at least 3 nodes.
+- For production, use Rancher HA deployed on something like EKS.
 
 ## Module Structure
 - `modules/vpc`: VPC, subnets, and networking resources
