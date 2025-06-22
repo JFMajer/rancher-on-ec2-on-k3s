@@ -5,6 +5,8 @@ set -euo pipefail
 echo "[INFO] Installing K3s..."
 curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.32.4+k3s1" sh -s - server --cluster-init
 
+sleep 30
+
 # Install Helm
 echo "[INFO] Installing Helm..."
 curl -s https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
