@@ -11,6 +11,7 @@ curl -s https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | ba
 
 # Set up kubeconfig
 echo "[INFO] Configuring kubectl access..."
+mkdir -p /root/.kube
 cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
 chmod 600 /root/.kube/config
 
