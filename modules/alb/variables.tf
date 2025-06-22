@@ -22,3 +22,8 @@ variable "domain_name" {
   description = "Domain name for the ALB"
   type        = string
 }
+
+variable "http_node_port" {
+  description = "NodePort for Rancher HTTP service"
+  type        = number
+}

@@ -48,3 +48,8 @@ variable "alb_sg_id" {
   description = "ID of the ALB security group to allow ingress from"
   type        = string
 }
+
+variable "http_node_port" {
+  description = "NodePort for Rancher HTTP service"
+  type        = number
+}

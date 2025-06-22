@@ -23,6 +23,7 @@ module "alb" {
   subnet_ids      = module.vpc.public_subnets_ids
   certificate_arn = aws_acm_certificate_validation.rancher_cert_validation.certificate_arn
   domain_name     = var.rancher_domain_name
+  http_node_port  = var.http_node_port
 }
 
 module "rancher_server" {
@@ -36,4 +37,5 @@ module "rancher_server" {
   max_size             = 2
   alb_target_group_arn = module.alb.alb_target_group_arn
   alb_sg_id            = module.alb.alb_sg_id
+  http_node_port       = var.http_node_port
 }

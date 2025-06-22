@@ -15,11 +15,12 @@ resource "aws_launch_template" "rancher_lt" {
 
   user_data = base64encode(templatefile("${path.module}/user-data.sh", {
     rancher_password    = aws_secretsmanager_secret_version.rancher_admin_password_version.secret_string,
-    rancher_domain_name = var.rancher_domain_name
+    rancher_domain_name = var.rancher_domain_name,
+    http_node_port      = var.http_node_port
   }))
 
   block_device_mappings {
-    device_name = "/dev/xvda"
+    device_name = "/dev/sda1"
     ebs {
       volume_size           = 50
       volume_type           = "gp3"
@@ -64,8 +65,8 @@ resource "aws_security_group" "ec2_sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port       = 80
-    to_port         = 80
+    from_port       = var.http_node_port
+    to_port         = var.http_node_port
     protocol        = "tcp"
     security_groups = [var.alb_sg_id]
   }

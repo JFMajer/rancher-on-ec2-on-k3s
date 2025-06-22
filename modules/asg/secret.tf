@@ -1,5 +1,10 @@
+resource "random_pet" "suffix" {
+  length    = 2
+  separator = "-"
+}
+
 resource "aws_secretsmanager_secret" "rancher_admin_password" {
-  name = "${var.name_prefix}-rancher-admin-password"
+  name = "${var.name_prefix}-rancher-admin-password-${random_pet.suffix.id}"
 }
 
 resource "aws_secretsmanager_secret_version" "rancher_admin_password_version" {
