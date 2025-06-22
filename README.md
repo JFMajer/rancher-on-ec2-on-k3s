@@ -1,6 +1,6 @@
 # Rancher on AWS EC2 with Terraform (LAB/Non-HA Setup)
 
-This project provisions a **lab/demo environment** for Rancher on AWS using EC2, Application Load Balancer (ALB), and Route53, all managed by Terraform. It is designed for quick bootstrapping and experimentation, running Rancher in **non-HA mode** (single K3s instance, no production guarantees).
+This project provisions a **lab/demo environment** for Rancher on AWS using EC2, Application Load Balancer (ALB), and Route53, all managed by Terraform. It aims to provide a **one-click deployment** of Rancher for experimentation, running in **non-HA mode** (single K3s instance, no production guarantees).
 
 ## Features
 - VPC with public and private subnets
