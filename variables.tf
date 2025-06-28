@@ -4,8 +4,8 @@ variable "rancher_domain_name" {
   default     = "rancher.heheszlo.com"
 }
 
-variable "http_node_port" {
-  description = "NodePort for Rancher HTTP service"
-  type        = number
-  default     = 31069
-}
+# variable "http_node_port" {
+#   description = "NodePort for Rancher HTTP service"
+#   type        = number
+#   default     = 31069
+# }

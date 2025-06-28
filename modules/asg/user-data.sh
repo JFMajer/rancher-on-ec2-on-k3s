@@ -65,15 +65,9 @@ helm install rancher rancher-latest/rancher \
   --set hostname="${rancher_domain_name}" \
   --set replicas=1 \
   --set bootstrapPassword="${rancher_password}" \
-  --set ingress.enabled=false \
-  --set service.type=NodePort \
-  --set agentTLSMode=system-store \
+  --set ingress.enabled=true \
   --wait \
   --timeout=600s
-
-echo "[INFO] Patching Rancher service HTTP NodePort..."
-kubectl -n cattle-system patch svc rancher \
-  -p "{\"spec\":{\"ports\":[{\"port\":80,\"nodePort\":${http_node_port},\"protocol\":\"TCP\",\"targetPort\":80}]}}"
 
 echo "[DONE] Rancher should now be available at: https://${rancher_domain_name}"
 

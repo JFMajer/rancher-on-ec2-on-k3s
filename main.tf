@@ -16,14 +16,21 @@ module "vpc" {
   multi_az_nat_gateway = false
 }
 
-module "alb" {
-  source          = "./modules/alb"
-  name_prefix     = "rancher"
-  vpc_id          = module.vpc.vpc_id
-  subnet_ids      = module.vpc.public_subnets_ids
-  certificate_arn = aws_acm_certificate_validation.rancher_cert_validation.certificate_arn
-  domain_name     = var.rancher_domain_name
-  http_node_port  = var.http_node_port
+# module "alb" {
+#   source          = "./modules/alb"
+#   name_prefix     = "rancher"
+#   vpc_id          = module.vpc.vpc_id
+#   subnet_ids      = module.vpc.public_subnets_ids
+#   certificate_arn = aws_acm_certificate_validation.rancher_cert_validation.certificate_arn
+#   domain_name     = var.rancher_domain_name
+#   http_node_port  = var.http_node_port
+# }
+
+module "nlb" {
+  source      = "./modules/nlb"
+  name_prefix = "rancher"
+  vpc_id      = module.vpc.vpc_id
+  subnet_ids  = module.vpc.public_subnets_ids
 }
 
 module "rancher_server" {
@@ -35,7 +42,6 @@ module "rancher_server" {
   desired_capacity     = 1
   min_size             = 1
   max_size             = 2
-  alb_target_group_arn = module.alb.alb_target_group_arn
-  alb_sg_id            = module.alb.alb_sg_id
-  http_node_port       = var.http_node_port
+  alb_target_group_arn = module.nlb.nlb_target_group_arn
+  lb_sg_id             = module.nlb.nlb_sg_id
 }
