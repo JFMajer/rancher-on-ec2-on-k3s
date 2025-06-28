@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+echo "DEBUG rancher_domain_name: ${rancher_domain_name}"
+
 # Set proper environment
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 export PATH=$PATH:/usr/local/bin
@@ -62,9 +64,9 @@ wget https://github.com/derailed/k9s/releases/latest/download/k9s_linux_amd64.de
 echo "[INFO] Installing Rancher..."
 helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
-  --set hostname="${rancher_domain_name}" \
+  --set hostname='${rancher_domain_name}' \
   --set replicas=1 \
-  --set bootstrapPassword="${rancher_password}" \
+  --set bootstrapPassword='${rancher_password}' \
   --set ingress.enabled=true \
   --wait \
   --timeout=600s
