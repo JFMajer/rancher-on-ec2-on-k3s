@@ -67,6 +67,7 @@ helm install rancher rancher-latest/rancher \
   --set bootstrapPassword="${rancher_password}" \
   --set ingress.enabled=false \
   --set service.type=NodePort \
+  --set agentTLSMode=system-store \
   --wait \
   --timeout=600s
 
