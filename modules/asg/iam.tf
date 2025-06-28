@@ -18,25 +18,25 @@ resource "aws_iam_instance_profile" "asg_instance_profile" {
   role = aws_iam_role.asg_instance_role.name
 }
 
-resource "aws_iam_policy" "asg_secrets_access" {
-  name = "${var.name_prefix}-asg-secrets-access"
+resource "aws_iam_policy" "asg_ssm_access" {
+  name = "${var.name_prefix}-asg-ssm-access"
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
       Action = [
-        "secretsmanager:GetSecretValue",
-        "secretsmanager:DescribeSecret"
+        "ssm:GetParameter",
+        "ssm:GetParameters"
       ]
       Effect   = "Allow"
-      Resource = aws_secretsmanager_secret.rancher_admin_password.arn
+      Resource = aws_ssm_parameter.rancher_admin_password.arn
     }]
   })
 }
 
-resource "aws_iam_role_policy_attachment" "asg_attach_secrets_policy" {
+resource "aws_iam_role_policy_attachment" "asg_attach_ssm_policy" {
   role       = aws_iam_role.asg_instance_role.name
-  policy_arn = aws_iam_policy.asg_secrets_access.arn
+  policy_arn = aws_iam_policy.asg_ssm_access.arn
 }
 
 resource "aws_iam_role_policy_attachment" "asg_attach_ssm_managed" {

@@ -14,7 +14,7 @@ resource "aws_launch_template" "rancher_lt" {
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
 
   user_data = base64encode(templatefile("${path.module}/user-data.sh", {
-    rancher_password    = aws_secretsmanager_secret_version.rancher_admin_password_version.secret_string,
+    rancher_password    = aws_ssm_parameter.rancher_admin_password.value,
     rancher_domain_name = var.rancher_domain_name,
     http_node_port      = var.http_node_port
   }))
